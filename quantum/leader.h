@@ -62,6 +62,11 @@ bool leader_sequence_timed_out(void);
 void leader_reset_timer(void);
 
 /**
+ * Get the sequence of leader keys
+ */
+uint16_t * get_leader_sequence(void);
+
+/**
  * Check the sequence buffer for the given keycode.
  *
  * \param kc The keycode to check.

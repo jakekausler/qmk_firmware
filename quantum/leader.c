@@ -76,6 +76,10 @@ void leader_reset_timer(void) {
     leader_time = timer_read();
 }
 
+uint16_t * get_leader_sequence(void) {
+    return leader_sequence;
+}
+
 bool leader_sequence_is(uint16_t kc1, uint16_t kc2, uint16_t kc3, uint16_t kc4, uint16_t kc5) {
     return leader_sequence[0] == kc1 && leader_sequence[1] == kc2 && leader_sequence[2] == kc3 && leader_sequence[3] == kc4 && leader_sequence[4] == kc5;
 }
