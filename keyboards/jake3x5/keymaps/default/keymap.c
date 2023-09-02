@@ -1,9 +1,22 @@
 // Copyright 2023 QMK
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include "quantum_keycodes.h"
+#include "action.h"
+#include "keycodes.h"
+#include "quantum.h"
 #include QMK_KEYBOARD_H
+#include "action_layer.h"
+#include "keymap_us.h"
+#include "quantum_keycodes.h"
 #include "features/sentence_case.h"
+#include "features/layer_lock.h"
+
+// TODO: OLED setup and information
+//  - Name of Layer
+//  - Minimap of Layer
+// TODO: Encoder changes cpi (separate slow/fast) on layer
+// TODO: Encoder changes scroll speed on layer
+// TODO: Encoder changes nav speed (trackball) on layer
 
 /*
  * LAYERS
@@ -25,11 +38,12 @@ enum layer_names {
 
 enum extra_keys {
     PLUS_EQUAL = SAFE_RANGE,
-    MINUS_EQUAL
+    MINUS_EQUAL,
+    LL_TOGG
 };
 
 enum tap_dances {
-    TD_QU = SAFE_RANGE,
+    TD_QU,
     TD_W,
     TD_F,
     TD_P,
@@ -66,7 +80,13 @@ enum tap_dances {
     TD_TAB,
     TD_1SS,
     TD_ENT,
-    TD_LDR
+    TD_LDR,
+    TD_NUML,
+    TD_SYML,
+    TD_NAVL,
+    TD_FUNL,
+    TD_MAC1,
+    TD_MAC2
 };
 
 enum unicode_names {
@@ -783,16 +803,16 @@ enum {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ALP] = LAYOUT_split_3x5(
 // ┌───────────┬───────────┬───────────┬───────────┬───────────┐                          ┌───────────┬───────────┬───────────┬───────────┬───────────┐
-    TD_QU,      TD_W,       TD_F,       TD_P,       TD_B,                                  TD_J,       TD_L,       TD_U,       TD_Y,       TD_WH,
+    TD(TD_QU),  TD(TD_W),   TD(TD_F),   TD(TD_P),   TD(TD_B),                              TD(TD_J),   TD(TD_L),   TD(TD_U),   TD(TD_Y),   TD(TD_WH),
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤                          ├───────────┼───────────┼───────────┼───────────┼───────────┤
-    TD_A,       TD_R,       TD_S,       TD_T,       TD_G,                                  TD_M,       TD_N,       TD_E,       TD_I,       TD_O,
+    TD(TD_A),   TD(TD_R),   TD(TD_S),   TD(TD_T),   TD(TD_G),                              TD(TD_M),   TD(TD_N),   TD(TD_E),   TD(TD_I),   TD(TD_O),
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤┌───────────┐┌───────────┐├───────────┼───────────┼───────────┼───────────┼───────────┤
-    TD_Z,       TD_X,       TD_C,       TD_D,       TD_V,        KC_F20,      KC_F23,      TD_K,       TD_H,       TD_TH,      TD_CH,      TD_SH,
+    TD(TD_Z),   TD(TD_X),   TD(TD_C),   TD(TD_D),   TD(TD_V),    TD(TD_MAC1),TD(TD_MAC2),  TD(TD_K),   TD(TD_H),   TD(TD_TH),  TD(TD_CH),  TD(TD_SH),
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴───────────┴───────────┴───────────┴───────────┘
 //                         ┌───────────┬───────────┬───────────┐                          ┌───────────┬───────────┬───────────┐
-                            TD_1SS,     TD_ENT,     TD_DEL,                                TD_BSPC,    TD_SPC,     TD_RPT,
+                            TD(TD_1SS), TD(TD_ENT), TD(TD_DEL),                            TD(TD_BSPC),TD(TD_SPC), TD(TD_RPT),
 //                         └───────────┼───────────┼───────────┤                          └───────────┴───────────┴───────────┘
-                                        TD_TAB,     TD_LDR
+                                        TD(TD_TAB), TD(TD_LDR)
 //                                     └───────────┴───────────┘
 //
 //
@@ -833,7 +853,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┌─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┐
     KC_GRAVE,             KC_TILDE,             KC_AMPR,              KC_PIPE,              PLUS_EQUAL,                            KC_DLR,     KC_AT,                KC_CIRC,              KC_DQT,               KC_PLUS,
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤                          ├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),KC_QUES,                               KC_ASTR,    MT(MOD_LCTL, KC_LBRC),MT(MOD_LSFT, KC_LBRC),MT(MOD_LALT, KC_UNDS),MT(MOD_LGUI, KC_MINUS),
+    MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),TD(TD_SYML),                           KC_ASTR,    MT(MOD_LCTL, KC_LBRC),MT(MOD_LSFT, KC_LBRC),MT(MOD_LALT, KC_UNDS),MT(MOD_LGUI, KC_MINUS),
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤┌───────────┐┌───────────┐├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
     KC_EXLM,              KC_EQUAL,             KC_LT,                KC_GT,                MINUS_EQUAL, _______,     _______,     KC_PERC,    KC_DOT,               KC_COMM,              KC_QUOT,              KC_SLSH,
 // └─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴───────────┘└───────────┘└───────────┘└───────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
@@ -849,7 +869,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┌───────────┬───────────┬───────────┬───────────┬───────────┐                          ┌───────────┬───────────┬───────────┬───────────┬───────────┐
     LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),                            LCTL(KC_Y), LCTL(KC_V), LCTL(KC_C), LCTL(KC_X), LCTL(KC_Z),
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤                          ├───────────┼───────────┼───────────┼───────────┼───────────┤
-    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RIGHT,   KC_PSCR,                               _______,    KC_LCTL,    KC_LSFT,    KC_LALT,    KC_LGUI,
+    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RIGHT,   TD(TD_NAVL),                           _______,    KC_LCTL,    KC_LSFT,    KC_LALT,    KC_LGUI,
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤┌───────────┐┌───────────┐├───────────┼───────────┼───────────┼───────────┼───────────┤
     KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_INS,      _______,     _______,     LCTL(KC_Y), LCTL(KC_V), LCTL(KC_C), LCTL(KC_X), LCTL(KC_Z),
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴───────────┴───────────┴───────────┴───────────┘
@@ -865,7 +885,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┌─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┐
     KC_GRAVE,             KC_TILDE,             KC_AMPR,              KC_PIPE,              PLUS_EQUAL,                            KC_DLR,     KC_7,                 KC_8,                 KC_9,                 KC_PLUS,
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤                          ├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),KC_QUES,                               KC_ASTR,    MT(MOD_LCTL, KC_4),   MT(MOD_LSFT, KC_5),   MT(MOD_LALT, KC_6),   MT(MOD_LGUI, KC_MINUS),
+    MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),TD(TD_NUML),                           KC_ASTR,    MT(MOD_LCTL, KC_4),   MT(MOD_LSFT, KC_5),   MT(MOD_LALT, KC_6),   MT(MOD_LGUI, KC_MINUS),
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤┌───────────┐┌───────────┐├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
     KC_EXLM,              KC_EQUAL,             KC_LT,                KC_GT,                MINUS_EQUAL, _______,     _______,     KC_PERC,    KC_1,                 KC_2,                 KC_3,                 KC_SLSH,
 // └─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴───────────┘└───────────┘└───────────┘└───────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
@@ -881,7 +901,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┌───────────┬───────────┬───────────┬───────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┐
     LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),                            KC_F12,     KC_F7,                KC_F8,                KC_F9,                KC_F15,
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤                          ├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    KC_LGUI,    KC_LALT,    KC_LSFT,    KC_LCTL,    _______,                               KC_F11,     MT(MOD_LCTL, KC_F4),  MT(MOD_LSFT, KC_F5),  MT(MOD_LALT, KC_F6),  MT(MOD_LGUI, KC_F14),
+    KC_LGUI,    KC_LALT,    KC_LSFT,    KC_LCTL,    TD(TD_FUNL),                           KC_F11,     MT(MOD_LCTL, KC_F4),  MT(MOD_LSFT, KC_F5),  MT(MOD_LALT, KC_F6),  MT(MOD_LGUI, KC_F14),
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤┌───────────┐┌───────────┐├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
     LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),  _______,     _______,     KC_F10,     KC_F1,                KC_F2,                KC_F3,                KC_F13,
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
@@ -911,11 +931,33 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
-bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 /*
-* SENTENCE CASE
-*/
+ * OLEDS
+ */
+ #ifdef OLED_ENABLE
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_270;
+    }
+    return OLED_ROTATION_90;
+}
+
+ bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+
+    } else {
+
+    }
+    return false;
+}
+#endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    //Sentence Case
   if (!process_sentence_case(keycode, record)) { return false; }
+  //Layuer Lock
+  if (!process_layer_lock(keycode, record, LL_TOGG)) { return false; }
   switch (keycode) {
     /*
     * MACROS
@@ -939,9 +981,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
  */
 
 // Capsword with home thumbs
-const uint16_t PROGMEM capsword[] = {TD_ENT, TD_SPC, COMBO_END};
+const uint16_t PROGMEM capsword[] = {KC_ENT, KC_SPC, COMBO_END};
+const uint16_t PROGMEM autocorrect[] = {KC_DEL, KC_BSPC, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(capsword, CW_TOGG)
+    COMBO(capsword, CW_TOGG),
+    COMBO(autocorrect, AC_TOGG)
 };
 
 void trackball_mode_on(int mode) {
@@ -2932,6 +2976,71 @@ void td_ldr_reset(tap_dance_state_t *state, void *user_data) {
             layer_off(_FUN);
     }
 }
+void td_numl_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(KC_QUES);
+            break;
+        case DOUBLE_TAP:
+            layer_lock_invert(get_highest_layer(layer_state));
+            reset_tap_dance(state);
+            break;
+    }
+}
+void td_syml_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(KC_QUES);
+            break;
+        case DOUBLE_TAP:
+            layer_lock_invert(get_highest_layer(layer_state));
+            reset_tap_dance(state);
+            break;
+    }
+}
+void td_navl_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(KC_PSCR);
+            break;
+        case DOUBLE_TAP:
+            layer_lock_invert(get_highest_layer(layer_state));
+            reset_tap_dance(state);
+            break;
+    }
+}
+void td_funl_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case DOUBLE_TAP:
+            layer_lock_invert(get_highest_layer(layer_state));
+            reset_tap_dance(state);
+            break;
+    }
+}
+void td_mac1_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            register_code16(QK_DYNAMIC_MACRO_PLAY_1);
+            unregister_code16(QK_DYNAMIC_MACRO_PLAY_1);
+        case DOUBLE_TAP:
+            register_code16(QK_DYNAMIC_MACRO_RECORD_START_1);
+            unregister_code16(QK_DYNAMIC_MACRO_RECORD_START_1);
+            reset_tap_dance(state);
+            break;
+    }
+}
+void td_mac2_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            register_code16(QK_DYNAMIC_MACRO_PLAY_2);
+            unregister_code16(QK_DYNAMIC_MACRO_PLAY_2);
+        case DOUBLE_TAP:
+            register_code16(QK_DYNAMIC_MACRO_RECORD_START_2);
+            unregister_code16(QK_DYNAMIC_MACRO_RECORD_START_2);
+            reset_tap_dance(state);
+            break;
+    }
+}
 
 tap_dance_action_t tap_dance_actions[] = {
     [TD_QU] = ACTION_TAP_DANCE_FN(td_qu_finished),
@@ -2972,4 +3081,10 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_1SS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_1ss_finished, td_1ss_reset),
     [TD_ENT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_ent_finished, td_ent_reset),
     [TD_LDR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_ldr_finished, td_ldr_reset),
+    [TD_NUML] = ACTION_TAP_DANCE_FN(td_numl_finished),
+    [TD_SYML] = ACTION_TAP_DANCE_FN(td_syml_finished),
+    [TD_NAVL] = ACTION_TAP_DANCE_FN(td_navl_finished),
+    [TD_FUNL] = ACTION_TAP_DANCE_FN(td_funl_finished),
+    [TD_MAC1] = ACTION_TAP_DANCE_FN(td_mac1_finished),
+    [TD_MAC2] = ACTION_TAP_DANCE_FN(td_mac2_finished),
 };
