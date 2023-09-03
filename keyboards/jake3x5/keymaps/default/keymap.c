@@ -11,9 +11,6 @@
 #include "features/sentence_case.h"
 #include "features/layer_lock.h"
 
-// TODO: OLED setup and information
-//  - Name of Layer
-//  - Minimap of Layer
 // TODO: Encoder changes cpi (separate slow/fast) on layer
 // TODO: Encoder changes scroll speed on layer
 // TODO: Encoder changes nav speed (trackball) on layer
@@ -951,12 +948,290 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     }
     return false;
 }
+
+void render_cpi_label(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_cpi(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_wpm_label(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_wpm(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+static uint16_t macro_timer = 0;
+const uint8_t FLASH_INTERVAL = 500;
+static bool macro_rendered = false;
+void render_macro_animation(void) {
+    if (timer_elapsed(macro_timer) > FLASH_INTERVAL) {
+        macro_rendered = !macro_rendered;
+        macro_timer = timer_read();
+    }
+    if (macro_rendered) {
+        oled_write_char("M", false);
+    }
+}
+
+static bool macro1_recorded = false;
+static bool macro1_recording = false;
+static bool macro2_recorded = false;
+static bool macro2_recording = false;
+
+void dynamic_macro_record_start_user(int8_t direction) {
+    if (direction == 1) {
+        macro1_recording = true;
+    } else if (direction == -1) {
+        macro2_recording = true;
+    }
+}
+void dynamic_macro_record_end_user(int8_t direction) {
+    if (direction == 1) {
+        macro1_recording = false;
+        macro1_recorded = true;
+    } else if (direction == -1) {
+        macro2_recording = false;
+        macro2_recorded = true;
+    }
+}
+
+void render_macro(bool main) {
+    if ((main && macro1_recorded) || (!main && macro2_recorded)) {
+        oled_set_cursor(4,6);
+        oled_write_char("M", false);
+    } else if ((main && macro1_recording) || (!main && macro2_recording)) {
+        oled_set_cursor(4,6);
+        render_macro_animation();
+    }
+}
+
+void render_autocorrect(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_capsword(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_leader(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_modifiers(void) {
+//TODO
+    oled_set_cursor(4,6);
+}
+
+void render_trackball_outline(void) {
+//TODO
+}
+
+void render_trackball_state(void) {
+    oled_set_cursor(1,6);
+    switch (trackball_mode) {
+        case NORMAL:
+            oled_write_char(0, false); //TODO
+            break;
+        case SLOW:
+            oled_write_char(0, false); //TODO
+            break;
+        case SCROLL:
+            oled_write_char(0, false); //TODO
+            break;
+        case NAV:
+            oled_write_char(0, false); //TODO
+            break;
+    }
+}
+
+void render_layer(void) {
+    int layer = get_highest_layer();
+    if (is_layer_locked(layer)) {
+        render_layer_lock();
+    }
+    oled_set_cursor(1,8);
+    switch (layer) {
+        case _ALP:
+            oled_write("ALP");
+            break;
+        case _GRK:
+            oled_write("GRK");
+            break;
+        case _MOU:
+            oled_write("MOU");
+            break;
+        case _NUM:
+            oled_write("NUM");
+            break;
+        case _SYM:
+            oled_write("SYM");
+            break;
+        case _NAV:
+            oled_write("NAV");
+            break;
+        case _FUN:
+            oled_write("FUN");
+            break;
+    }
+}
+
+void render_layer_lock(void) {
+    oled_set_cursor(0,8);
+    oled_write_char(0, false); //TODO
+}
+
+char left_layer_row_chars[7][5][5] = {
+    {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }
+};
+char right_layer_row_chars[7][5][4] = {
+    {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }, {
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }
+};
+
+void render_keymap(bool is_mainhand) {
+    if (is_mainhand) {
+        int layer = get_highest_layer();
+        for (int row=0;row<5;row++) {
+            for (int c=0;c<5;c++) {
+                oled_set_cursor(c,1+row);
+                oled_write_char(left_layer_row_chars[layer][row][c], false);
+            }
+        }
+    } else {
+        int layer = get_highest_layer();
+        for (int row=0;row<4;row++) {
+            for (int c=0;c<5;c++) {
+                oled_set_cursor(c,1+row);
+                oled_write_char(right_layer_row_chars[layer][row][c], false);
+            }
+        }
+    }
+}
+
+void render_left(void) {
+    render_keymap(true);
+    render_macro(true);
+    render_layer();
+    render_modifiers();
+    render_leader();
+    render_capsword();
+    render_autocorrect();
+    render_wpm_label();
+    render_wpm();
+}
+
+void render_right(void) {
+    render_keymap(false);
+    render_trackball_state();
+    render_macro(true);
+    render_layer();
+    render_wpi_label();
+    render_wpi();
+    render_trackball_outline();
+}
+
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        render_left();
+    } else {
+        render_right();
+    }
+    return false;
+}
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     //Sentence Case
   if (!process_sentence_case(keycode, record)) { return false; }
-  //Layuer Lock
+  //Layer Lock
   if (!process_layer_lock(keycode, record, LL_TOGG)) { return false; }
   switch (keycode) {
     /*
@@ -988,22 +1263,27 @@ combo_t key_combos[] = {
     COMBO(autocorrect, AC_TOGG)
 };
 
+static int trackball_mode = NORMAL;
 void trackball_mode_on(int mode) {
     switch (mode) {
         case NORMAL:
+            trackball_mode = NORMAL;
             pointing_device_set_cpi(2000);
             trackball_navigating = false;
             trackball_scrolling = false;
             break;
         case SLOW:
+            trackball_mode = SLOW;
             trackball_mode_on(NORMAL);
             pointing_device_set_cpi(1000);
             break;
         case SCROLL:
+            trackball_mode = SCROLL;
             trackball_mode_on(NORMAL);
             trackball_scrolling = true;
             break;
         case NAV:
+            trackball_mode = NAV;
             trackball_mode_on(NORMAL);
             trackball_navigating = true;
             break;
