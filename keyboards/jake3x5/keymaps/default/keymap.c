@@ -780,6 +780,24 @@ bool trackball_scrolling = false;
 
 int TRACKBALL_NAV_THRESHOLD = 8;
 
+static int trackball_mode = NORMAL;
+const int NORMAL_CPI_DEFAULT = 2000;
+const int SLOW_CPI_DEFAULT = 1000;
+const int SCROLL_CPI_DEFAULT = 2000;
+const int NAV_SPEED_DEFAULT = 1;
+const int NORMAL_CPI_MIN = 100;
+const int SLOW_CPI_MIN = 100;
+const int SCROLL_CPI_MIN = 100;
+const int NAV_SPEED_MIN = 1;
+const int NORMAL_CPI_MAX = 16000;
+const int SLOW_CPI_MAX = 16000;
+const int SCROLL_CPI_MAX = 16000;
+const int NAV_SPEED_MAX = 20;
+static int normal_cpi = NORMAL_CPI_DEFAULT;
+static int slow_cpi = SLOW_CPI_DEFAULT;
+static int scroll_cpi = SCROLL_CPI_DEFAULT;
+static int nav_speed = NAV_SPEED_DEFAULT;
+
 /*
  * TAP DANCE
  */
@@ -950,23 +968,40 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 void render_cpi_label(void) {
-//TODO
-    oled_set_cursor(4,6);
+    oled_set_cursor(0,13);
+    oled_write("CPI:");
 }
 
 void render_cpi(void) {
-//TODO
-    oled_set_cursor(4,6);
+    oled_set_cursor(0,14);
+    char cpi_str[5];
+    switch (trackball_mode) {
+        case NORMAL:
+            sprintf(cpi_str, "% 5d", normal_cpi);
+            break;
+        case SLOW:
+            sprintf(cpi_str, "% 5d", slow_cpi);
+            break;
+        case SCROLL:
+            sprintf(cpi_str, "% 5d", scroll_cpi);
+            break;
+        case NAV:
+            sprintf(cpi_str, "% 5d", nav_speed);
+            break;
+    }
+    oled_write(cpi_str, false);
 }
 
 void render_wpm_label(void) {
-//TODO
-    oled_set_cursor(4,6);
+    oled_set_cursor(0,13);
+    oled_write("WPM:");
 }
 
 void render_wpm(void) {
-//TODO
-    oled_set_cursor(4,6);
+    oled_set_cursor(0,14);
+    char wpm_str[5];
+    sprintf(wpm_str, "% 5d", get_current_wpm());
+    oled_write(wpm_str, false);
 }
 
 static uint16_t macro_timer = 0;
@@ -1015,27 +1050,66 @@ void render_macro(bool main) {
 }
 
 void render_autocorrect(void) {
-//TODO
-    oled_set_cursor(4,6);
+    if (autocorrect_is_enabled()) {
+        oled_set_cursor(2,11);
+        oled_write_char(0, false);//TODO
+        oled_set_cursor(3,11);
+        oled_write_char(0, false);//TODO
+        oled_set_cursor(4,11);
+        oled_write_char(0, false);//TODO
+    }
 }
 
 void render_capsword(void) {
-//TODO
-    oled_set_cursor(4,6);
+    if (is_caps_word_on()) {
+        oled_set_cursor(0,11);
+        oled_write_char(0, false);//TODO
+        oled_set_cursor(1,11);
+        oled_write_char(0, false);//TODO
+    }
 }
 
 void render_leader(void) {
-//TODO
-    oled_set_cursor(4,6);
+    if (leader_sequence_active()) {
+        oled_set_cursor(4,10);
+        oled_write_char(0, false);//TODO
+    }
 }
 
 void render_modifiers(void) {
-//TODO
-    oled_set_cursor(4,6);
+    if (get_mods() & MOD_MASK_CTRL || get_oneshot_mods() & MOD_MASK_CTRL) {
+        oled_set_cursor(0,10);
+        oled_write_char(0, false); //TODO
+    }
+    if (get_mods() & MOD_MASK_SHIFT || get_oneshot_mods() & MOD_MASK_SHIFT) {
+        oled_set_cursor(0,10);
+        oled_write_char(1, false); //TODO
+    }
+    if (get_mods() & MOD_MASK_ALT || get_oneshot_mods() & MOD_MASK_ALT) {
+        oled_set_cursor(0,10);
+        oled_write_char(2, false); //TODO
+    }
+    if (get_mods() & MOD_MASK_GUI || get_oneshot_mods() & MOD_MASK_GUI) {
+        oled_set_cursor(0,10);
+        oled_write_char(3, false); //TODO
+    }
 }
 
 void render_trackball_outline(void) {
-//TODO
+    oled_set_cursor(0,5);
+    oled_write_char(0, false); //TODO
+    oled_set_cursor(1,5);
+    oled_write_char(0, false); //TODO
+    oled_set_cursor(2,5);
+    oled_write_char(0, false); //TODO
+    oled_set_cursor(0,6);
+    oled_write_char(0, false); //TODO
+    oled_set_cursor(2,6);
+    oled_write_char(0, false); //TODO
+    oled_set_cursor(0,7);
+    oled_write_char(0, false); //TODO
+    oled_set_cursor(1,7);
+    oled_write_char(0, false); //TODO
 }
 
 void render_trackball_state(void) {
@@ -1263,28 +1337,30 @@ combo_t key_combos[] = {
     COMBO(autocorrect, AC_TOGG)
 };
 
-static int trackball_mode = NORMAL;
 void trackball_mode_on(int mode) {
     switch (mode) {
         case NORMAL:
             trackball_mode = NORMAL;
-            pointing_device_set_cpi(2000);
+            pointing_device_set_cpi(normal_cpi);
             trackball_navigating = false;
             trackball_scrolling = false;
             break;
         case SLOW:
             trackball_mode = SLOW;
             trackball_mode_on(NORMAL);
-            pointing_device_set_cpi(1000);
+            pointing_device_set_cpi(slow_cpi);
             break;
         case SCROLL:
             trackball_mode = SCROLL;
             trackball_mode_on(NORMAL);
+            trackball_navigating = false;
             trackball_scrolling = true;
+            pointing_device_set_cpi(scroll_cpi);
             break;
         case NAV:
             trackball_mode = NAV;
             trackball_mode_on(NORMAL);
+            trackball_scrolling = false;
             trackball_navigating = true;
             break;
     }
@@ -1293,19 +1369,28 @@ void trackball_mode_on(int mode) {
 void pointing_device_init_user(void) {
     set_auto_mouse_layer(_MOU);
     set_auto_mouse_enable(true);
+    pointing_device_set_cpi(normal_cpi);
 }
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (trackball_navigating) {
         if (mouse_report.x > TRACKBALL_NAV_THRESHOLD) {
-            tap_code(KC_RIGHT);
+            for (int i=0; i<nav_speed; i++) {
+                tap_code(KC_RIGHT);
+            }
         } else if (mouse_report.y < -TRACKBALL_NAV_THRESHOLD) {
-            tap_code(KC_LEFT);
+            for (int i=0; i<nav_speed; i++) {
+                tap_code(KC_LEFT);
+            }
         }
         if (mouse_report.y > TRACKBALL_NAV_THRESHOLD) {
-            tap_code(KC_UP);
+            for (int i=0; i<nav_speed; i++) {
+                tap_code(KC_UP);
+            }
         } else if (mouse_report.y < -TRACKBALL_NAV_THRESHOLD) {
-            tap_code(KC_DOWN);
+            for (int i=0; i<nav_speed; i++) {
+                tap_code(KC_DOWN);
+            }
         }
         mouse_report.x = 0;
         mouse_report.y = 0;

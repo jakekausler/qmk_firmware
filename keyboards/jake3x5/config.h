@@ -22,6 +22,8 @@
 
 #define UNICODE_SELECTED_MODES UNICODE_MODE_WINCOMPOSE
 
+#define OLED_COLUMN_OFFSET 1
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
