@@ -83,7 +83,11 @@ enum tap_dances {
     TD_NAVL,
     TD_FUNL,
     TD_MAC1,
-    TD_MAC2
+    TD_MAC2,
+    TD_MUTE,
+    TD_SWAPP,
+    TD_SWTAB,
+    TD_SWVD
 };
 
 enum unicode_names {
@@ -822,7 +826,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤                          ├───────────┼───────────┼───────────┼───────────┼───────────┤
     TD(TD_A),   TD(TD_R),   TD(TD_S),   TD(TD_T),   TD(TD_G),                              TD(TD_M),   TD(TD_N),   TD(TD_E),   TD(TD_I),   TD(TD_O),
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤┌───────────┐┌───────────┐├───────────┼───────────┼───────────┼───────────┼───────────┤
-    TD(TD_Z),   TD(TD_X),   TD(TD_C),   TD(TD_D),   TD(TD_V),    TD(TD_MAC1),TD(TD_MAC2),  TD(TD_K),   TD(TD_H),   TD(TD_TH),  TD(TD_CH),  TD(TD_SH),
+    TD(TD_Z),   TD(TD_X),   TD(TD_C),   TD(TD_D),   TD(TD_V),    TD(TD_SWAPP),TD(TD_SWTAB),TD(TD_K),   TD(TD_H),   TD(TD_TH),  TD(TD_CH),  TD(TD_SH),
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴───────────┴───────────┴───────────┴───────────┘
 //                         ┌───────────┬───────────┬───────────┐                          ┌───────────┬───────────┬───────────┐
                             TD(TD_1SS), TD(TD_ENT), TD(TD_DEL),                            TD(TD_BSPC),TD(TD_SPC), TD(TD_RPT),
@@ -838,7 +842,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────────────────┼───────────────────┼───────────────────┼───────────────────┼───────────────────┤                          ├───────────────────┼───────────────────┼───────────────────┼───────────────────┼───────────────────┤
     UP(GK_A_L, GK_A_U), UP(GK_R_L, GK_R_U), UP(GK_S_L, GK_S_U), UP(GK_T_L, GK_T_U), UP(GK_G_L, GK_G_U),                            UP(GK_M_L, GK_M_U), UP(GK_N_L, GK_N_U), UP(GK_E_L, GK_E_U), UP(GK_I_L, GK_I_U), UP(GK_O_L, GK_O_U),
 // ├───────────────────┼───────────────────┼───────────────────┼───────────────────┼───────────────────┤┌───────────┐┌───────────┐├───────────────────┼───────────────────┼───────────────────┼───────────────────┼───────────────────┤
-    UP(GK_Z_L, GK_Z_U), UP(GK_X_L, GK_X_U), UP(GK_PS_L, GK_PS_U),UP(GK_D_L, GK_D_U),UP(GK_W_L, GK_W_U),  _______,     _______,     UP(GK_K_L, GK_K_U), UP(GK_H_L, GK_H_U), UP(GK_TH_L, GK_TH_U),UP(GK_KO_L, GK_KO_U),UP(GK_ST_L, GK_ST_U),
+    UP(GK_Z_L, GK_Z_U), UP(GK_X_L, GK_X_U), UP(GK_PS_L, GK_PS_U),UP(GK_D_L, GK_D_U),UP(GK_W_L, GK_W_U),  TD(TD_SWAPP),TD(TD_SWTAB), UP(GK_K_L, GK_K_U), UP(GK_H_L, GK_H_U), UP(GK_TH_L, GK_TH_U),UP(GK_KO_L, GK_KO_U),UP(GK_ST_L, GK_ST_U),
 // └───────────────────┴───────────────────┴───────────────────┴───────────────────┴───────────────────┘└───────────┘└───────────┘└───────────────────┴───────────────────┴───────────────────┴───────────────────┴───────────────────┘
 //                                         ┌───────────────────┬───────────────────┬───────────────────┐                          ┌───────────────────┬───────────────────┬───────────────────┐
                                             TD_1SS,             TD_ENT,             TD_DEL,                                        TD_BSPC,            TD_SPC,             TD_RPT,
@@ -868,9 +872,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┌─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┐
     KC_GRAVE,             KC_TILDE,             KC_AMPR,              KC_PIPE,              PLUS_EQUAL,                            KC_DLR,     KC_AT,                KC_CIRC,              KC_DQT,               KC_PLUS,
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤                          ├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),TD(TD_SYML),                           KC_ASTR,    MT(MOD_LCTL, KC_LBRC),MT(MOD_LSFT, KC_LBRC),MT(MOD_LALT, KC_UNDS),MT(MOD_LGUI, KC_MINUS),
+    MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),TD(TD_SYML),                           KC_ASTR,    MT(MOD_LCTL, KC_RBRC),MT(MOD_LSFT, KC_LBRC),MT(MOD_LALT, KC_UNDS),MT(MOD_LGUI, KC_MINUS),
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤┌───────────┐┌───────────┐├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    KC_EXLM,              KC_EQUAL,             KC_LT,                KC_GT,                MINUS_EQUAL, _______,     _______,     KC_PERC,    KC_DOT,               KC_COMM,              KC_QUOT,              KC_SLSH,
+    KC_EXLM,              KC_EQUAL,             KC_LT,                KC_GT,                MINUS_EQUAL, TD(TD_MAC1),_______,      KC_PERC,    KC_DOT,               KC_COMM,              KC_QUOT,              KC_SLSH,
 // └─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴───────────┘└───────────┘└───────────┘└───────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
 //                                             ┌─────────────────────┬─────────────────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┐
                                                 KC_SCLN,              KC_COLN,              KC_SLSH,                               _______,    _______,              _______,
@@ -886,7 +890,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤                          ├───────────┼───────────┼───────────┼───────────┼───────────┤
     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RIGHT,   TD(TD_NAVL),                           _______,    KC_LCTL,    KC_LSFT,    KC_LALT,    KC_LGUI,
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤┌───────────┐┌───────────┐├───────────┼───────────┼───────────┼───────────┼───────────┤
-    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_INS,      _______,     _______,     LCTL(KC_Y), LCTL(KC_V), LCTL(KC_C), LCTL(KC_X), LCTL(KC_Z),
+    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_INS,      TD(TD_SWVD), _______,     LCTL(KC_Y), LCTL(KC_V), LCTL(KC_C), LCTL(KC_X), LCTL(KC_Z),
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴───────────┴───────────┴───────────┴───────────┘
 //                         ┌───────────┬───────────┬───────────┐                          ┌───────────┬───────────┬───────────┐
                             _______,    _______,    _______,                               _______,    _______,    _______,
@@ -902,7 +906,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤                          ├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
     MT(MOD_LGUI, KC_LCBR),MT(MOD_LALT, KC_RCBR),MT(MOD_LSFT, KC_LPRN),MT(MOD_LCTL, KC_RPRN),TD(TD_NUML),                           KC_ASTR,    MT(MOD_LCTL, KC_4),   MT(MOD_LSFT, KC_5),   MT(MOD_LALT, KC_6),   MT(MOD_LGUI, KC_MINUS),
 // ├─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼───────────┤┌───────────┐┌───────────┐├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    KC_EXLM,              KC_EQUAL,             KC_LT,                KC_GT,                MINUS_EQUAL, _______,     _______,     KC_PERC,    KC_1,                 KC_2,                 KC_3,                 KC_SLSH,
+    KC_EXLM,              KC_EQUAL,             KC_LT,                KC_GT,                MINUS_EQUAL, _______,     TD(TD_MAC2), KC_PERC,    KC_1,                 KC_2,                 KC_3,                 KC_SLSH,
 // └─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴───────────┘└───────────┘└───────────┘└───────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
 //                                             ┌─────────────────────┬─────────────────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┐
                                                 _______,              _______,              _______,                               KC_COMM,    KC_0,                 KC_DOT,
@@ -918,7 +922,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤                          ├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
     KC_LGUI,    KC_LALT,    KC_LSFT,    KC_LCTL,    TD(TD_FUNL),                           KC_F11,     MT(MOD_LCTL, KC_F4),  MT(MOD_LSFT, KC_F5),  MT(MOD_LALT, KC_F6),  MT(MOD_LGUI, KC_F14),
 // ├───────────┼───────────┼───────────┼───────────┼───────────┤┌───────────┐┌───────────┐├───────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
-    LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),  _______,     _______,     KC_F10,     KC_F1,                KC_F2,                KC_F3,                KC_F13,
+    LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),  _______,     TD(TD_MUTE), KC_F10,     KC_F1,                KC_F2,                KC_F3,                KC_F13,
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
 //                         ┌───────────┬───────────┬───────────┐                          ┌───────────┬─────────────────────┬─────────────────────┐
                             _______,    _______,    _______,                               KC_F16,     KC_F17,               KC_F18,
@@ -936,13 +940,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_ALP] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  },
-    [_GRK] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  },
-    [_MOU] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  },
-    [_SYM] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  },
-    [_NAV] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  },
-    [_NUM] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  },
-    [_FUN] =   { ENCODER_CCW_CW(KC_F19, KC_F21), ENCODER_CCW_CW(KC_F22, KC_F24)  }
+    [_ALP] =   { ENCODER_CCW_CW(S(A(KC_ESC)),A(KC_ESC)), ENCODER_CCW_CW(C(KC_PGDN),C(KC_PGUP))  },
+    [_GRK] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(_______,_______)  },
+    [_MOU] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(_______,_______)  },
+    [_SYM] =   { ENCODER_CCW_CW(KC_F19, KC_F20), ENCODER_CCW_CW(_______,_______)  },
+    [_NAV] =   { ENCODER_CCW_CW(C(G(KC_LEFT)),C(G(KC_RIGHT))), ENCODER_CCW_CW(_______,_______)  },
+    [_NUM] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(C(KC_EQUAL), C(KC_MINUS))  },
+    [_FUN] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(F23,F24)  }
 };
 #endif
 
@@ -1042,7 +1046,7 @@ void dynamic_macro_record_end_user(int8_t direction) {
 void render_macro(bool main) {
     if ((main && macro1_recorded) || (!main && macro2_recorded)) {
         oled_set_cursor(4,6);
-        oled_write_char("M", false);
+        oled_write_char('M', false);
     } else if ((main && macro1_recording) || (!main && macro2_recording)) {
         oled_set_cursor(4,6);
         render_macro_animation();
@@ -1052,80 +1056,80 @@ void render_macro(bool main) {
 void render_autocorrect(void) {
     if (autocorrect_is_enabled()) {
         oled_set_cursor(2,11);
-        oled_write_char(0, false);//TODO
+        oled_write_char(17, false);
         oled_set_cursor(3,11);
-        oled_write_char(0, false);//TODO
+        oled_write_char(18, false);
         oled_set_cursor(4,11);
-        oled_write_char(0, false);//TODO
+        oled_write_char('B', false);
     }
 }
 
 void render_capsword(void) {
     if (is_caps_word_on()) {
         oled_set_cursor(0,11);
-        oled_write_char(0, false);//TODO
+        oled_write_char(0, false);
         oled_set_cursor(1,11);
-        oled_write_char(0, false);//TODO
+        oled_write_char('A', false);
     }
 }
 
 void render_leader(void) {
     if (leader_sequence_active()) {
         oled_set_cursor(4,10);
-        oled_write_char(0, false);//TODO
+        oled_write_char(5, false);
     }
 }
 
 void render_modifiers(void) {
     if (get_mods() & MOD_MASK_CTRL || get_oneshot_mods() & MOD_MASK_CTRL) {
         oled_set_cursor(0,10);
-        oled_write_char(0, false); //TODO
+        oled_write_char(1, false);
     }
     if (get_mods() & MOD_MASK_SHIFT || get_oneshot_mods() & MOD_MASK_SHIFT) {
         oled_set_cursor(0,10);
-        oled_write_char(1, false); //TODO
+        oled_write_char(2, false);
     }
     if (get_mods() & MOD_MASK_ALT || get_oneshot_mods() & MOD_MASK_ALT) {
         oled_set_cursor(0,10);
-        oled_write_char(2, false); //TODO
+        oled_write_char(3, false);
     }
     if (get_mods() & MOD_MASK_GUI || get_oneshot_mods() & MOD_MASK_GUI) {
         oled_set_cursor(0,10);
-        oled_write_char(3, false); //TODO
+        oled_write_char(4, false);
     }
 }
 
 void render_trackball_outline(void) {
     oled_set_cursor(0,5);
-    oled_write_char(0, false); //TODO
+    oled_write_char(10, false);
     oled_set_cursor(1,5);
-    oled_write_char(0, false); //TODO
+    oled_write_char(11, false);
     oled_set_cursor(2,5);
-    oled_write_char(0, false); //TODO
+    oled_write_char(12, false);
     oled_set_cursor(0,6);
-    oled_write_char(0, false); //TODO
+    oled_write_char(13, false);
     oled_set_cursor(2,6);
-    oled_write_char(0, false); //TODO
+    oled_write_char(14, false);
     oled_set_cursor(0,7);
-    oled_write_char(0, false); //TODO
+    oled_write_char(15, false);
     oled_set_cursor(1,7);
-    oled_write_char(0, false); //TODO
+    oled_write_char(16, false);
 }
 
 void render_trackball_state(void) {
     oled_set_cursor(1,6);
     switch (trackball_mode) {
         case NORMAL:
-            oled_write_char(0, false); //TODO
+            oled_write_char('N', false);
             break;
         case SLOW:
-            oled_write_char(0, false); //TODO
+            oled_write_char('S', false);
             break;
         case SCROLL:
-            oled_write_char(0, false); //TODO
+            oled_write_char(19, false);
             break;
         case NAV:
-            oled_write_char(0, false); //TODO
+            oled_write_char(20, false);
             break;
     }
 }
@@ -1163,90 +1167,90 @@ void render_layer(void) {
 
 void render_layer_lock(void) {
     oled_set_cursor(0,8);
-    oled_write_char(0, false); //TODO
+    oled_write_char(0, false);
 }
 
 char left_layer_row_chars[7][5][5] = {
     {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'Q','W','F','P','B'},
+        {'A','R','S','T','G'},
+        {'Z','X','C','D','V'},
+        {' ',' ',2,21,22},
+        {' ',' ',' ',23,5}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {59,185,149,144,130},
+        {129,145,146,147,131},
+        {134,150,151,132,152},
+        {' ',' ',2,21,22},
+        {' ',' ',' ',23,5}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'-','-','-','-','-'},
+        {'-','-','-','-','-'},
+        {'-','-','-','-','-'},
+        {' ',' ',31,30,'-'},
+        {' ',' ',' ',127,'-'}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'`','~','&','|',157},
+        {'{','}','(',')','?'},
+        {'!','=','<','>',158},
+        {' ',' ',';',':','/'},
+        {' ',' ',' ','#','\\'}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {159,189,190,191,188},
+        {9,7,6,8,128},
+        {194,192,193,195,160},
+        {' ',' ','-','-','-'},
+        {' ',' ',' ','-','-'}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'`','~','&','|',157},
+        {'{','}','(',')','?'},
+        {'!','=','<','>',158},
+        {' ',' ','-','-','-'},
+        {' ',' ',' ','-','-'}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {159,189,190,191,188},
+        {4,3,2,1,'-'},
+        {159,189,190,191,188},
+        {' ',' ','-','-','-'},
+        {' ',' ',' ','-','-'}
     }
 };
 char right_layer_row_chars[7][5][4] = {
     {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'J','L','U','Y',26},
+        {'M','N','E','I','O'},
+        {'K','H',27,28,29},
+        {25,24,'+',' ',' '}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {142,139,148,155,156},
+        {140,141,133,137,143},
+        {138,135,136,154,153},
+        {25,24,'+',' ',' '}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'-','-','-','-','-'},
+        {'-','-','-','-','-'},
+        {'-','-','-','-','-'},
+        {'-','-','-',' ',' '}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'$','@','^','\"','+'},
+        {'*',']','[','_','-'},
+        {'%','.',',','\'','/'},
+        {'-','-','-',' ',' '}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {188,191,190,189,159},
+        {'-',1,2,3,4},
+        {188,191,190,189,159},
+        {'-','-','-',' ',' '}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {'$','7,'8','9','+'},
+        {'*','4','7','6','-'},
+        {'%','1','2','3'','/'},
+        {',','0','.',' ',' '}
     }, {
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0},
-        {0,0,0,0,0}
+        {207,202,203,204,210},
+        {206,199,200,201,209},
+        {205,196,197,198,208},
+        {211,212,213,' ',' '}
     }
 };
 
@@ -2698,17 +2702,19 @@ void td_p_finished(tap_dance_state_t *state, void *user_data) {
             tap_code(KC_P);
             break;
         case DOUBLE_TAP:
-            modifier_tap_codes(arr, 1, KC_PGUP);
+            modifier_tap_codes(arr, 1, KC_PGDN);
             reset_tap_dance(state);
             break;
     }
 }
 void td_b_finished(tap_dance_state_t *state, void *user_data) {
+    int8_t arr[] = {KC_LCTL};
     switch (cur_dance(state)) {
         case SINGLE_TAP:
             tap_code(KC_B);
             break;
         case DOUBLE_TAP:
+            modifier_tap_codes(arr, 1, KC_PGUP);
             reset_tap_dance(state);
             break;
     }
@@ -2840,7 +2846,7 @@ void td_z_finished(tap_dance_state_t *state, void *user_data) {
             modifier_tap_codes(arr0, 1, KC_Z);
             break;
         case TRIPLE_TAP:
-            modifier_tap_codes(arr1, 2, KC_Z);
+            modifier_tap_codes(arr1, 2, KC_Y);
             reset_tap_dance(state);
             break;
     }
@@ -3276,7 +3282,7 @@ void td_1ss_finished(tap_dance_state_t *state, void *user_data) {
             set_oneshot_mods(MOD_LSFT);
             break;
         case DOUBLE_TAP:
-            modifier_tap_codes(arr, 1, KC_QUOT);
+            modifier_tap_codes(arr, 1, KC_DQT);
             reset_tap_dance(state);
             break;
         case SINGLE_HOLD:
@@ -3406,6 +3412,39 @@ void td_mac2_finished(tap_dance_state_t *state, void *user_data) {
             break;
     }
 }
+void td_mute_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(G(KC_F23));
+    }
+}
+void td_swapp_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(G(KC_C));
+        case DOUBLE_TAP:
+            tap_code16(A(KC_F4));
+            break;
+    }
+}
+void td_swtab_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(C(KC_T));
+        case DOUBLE_TAP:
+            tap_code16(C(KC_W));
+            break;
+    }
+}
+void td_swvd_finished(tap_dance_state_t *state, void *user_data) {
+    switch (cur_dance(state)) {
+        case SINGLE_TAP:
+            tap_code16(G(C(KC_D)));
+        case DOUBLE_TAP:
+            tap_code16(G(C(KC_F4)));
+            break;
+    }
+}
 
 tap_dance_action_t tap_dance_actions[] = {
     [TD_QU] = ACTION_TAP_DANCE_FN(td_qu_finished),
@@ -3452,4 +3491,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_FUNL] = ACTION_TAP_DANCE_FN(td_funl_finished),
     [TD_MAC1] = ACTION_TAP_DANCE_FN(td_mac1_finished),
     [TD_MAC2] = ACTION_TAP_DANCE_FN(td_mac2_finished),
+    [TD_MUTE] = ACTION_TAP_DANCE_FN(td_mute_finished),
+    [TD_SWAPP] = ACTION_TAP_DANCE_FN(td_swapp_finished),
+    [TD_SWTAB] = ACTION_TAP_DANCE_FN(td_swtab_finished),
+    [TD_SWVD] = ACTION_TAP_DANCE_FN(td_swvd_finished),
 };
