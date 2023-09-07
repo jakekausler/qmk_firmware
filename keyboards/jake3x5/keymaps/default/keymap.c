@@ -3,6 +3,7 @@
 
 #include "action.h"
 #include "keycodes.h"
+#include "pointing_device.h"
 #include "quantum.h"
 #include QMK_KEYBOARD_H
 #include "action_layer.h"
@@ -11,9 +12,7 @@
 #include "features/sentence_case.h"
 #include "features/layer_lock.h"
 
-// TODO: Encoder changes cpi (separate slow/fast) on layer
-// TODO: Encoder changes scroll speed on layer
-// TODO: Encoder changes nav speed (trackball) on layer
+//TODO: Caps word on visualizer
 
 /*
  * LAYERS
@@ -36,7 +35,9 @@ enum layer_names {
 enum extra_keys {
     PLUS_EQUAL = SAFE_RANGE,
     MINUS_EQUAL,
-    LL_TOGG
+    LL_TOGG,
+    CPI_UP,
+    CPI_DN
 };
 
 enum tap_dances {
@@ -943,10 +944,10 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_ALP] =   { ENCODER_CCW_CW(S(A(KC_ESC)),A(KC_ESC)), ENCODER_CCW_CW(C(KC_PGDN),C(KC_PGUP))  },
     [_GRK] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(_______,_______)  },
     [_MOU] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(_______,_______)  },
-    [_SYM] =   { ENCODER_CCW_CW(KC_F19, KC_F20), ENCODER_CCW_CW(_______,_______)  },
+    [_SYM] =   { ENCODER_CCW_CW(C(KC_EQUAL), C(KC_MINUS)), ENCODER_CCW_CW(_______,_______)  },
     [_NAV] =   { ENCODER_CCW_CW(C(G(KC_LEFT)),C(G(KC_RIGHT))), ENCODER_CCW_CW(_______,_______)  },
-    [_NUM] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(C(KC_EQUAL), C(KC_MINUS))  },
-    [_FUN] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(F23,F24)  }
+    [_NUM] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(CPI_DN, CPI_UP)  },
+    [_FUN] =   { ENCODER_CCW_CW(_______,_______), ENCODER_CCW_CW(F21,F22)  }
 };
 #endif
 
@@ -1323,6 +1324,74 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case MINUS_EQUAL:
         if (record->event.pressed) {
             SEND_STRING("-=");
+        }
+        return false;
+    case CPI_DN:
+        if (record->event.pressed) {
+            switch (trackball_mode) {
+                case NORMAL:
+                    normal_cpi -= 100;
+                    if (normal_cpi < NORMAL_CPI_MIN) {
+                        normal_cpi = NORMAL_CPI_MIN;
+                    }
+                    pointing_device_set_cpi(normal_cpi);
+                    return false;
+                case SLOW:
+                    slow_cpi -= 100;
+                    if (slow_cpi < SLOW_CPI_MIN) {
+                        slow_cpi = SLOW_CPI_MIN;
+                    }
+                    pointing_device_set_cpi(slow_cpi);
+                    return false;
+                case SCROLL:
+                    scroll_cpi -= 100;
+                    if (scroll_cpi < SCROLL_CPI_MIN) {
+                        scroll_cpi = SCROLL_CPI_MIN;
+                    }
+                    pointing_device_set_cpi(scroll_cpi);
+                    return false;
+                case NAV:
+                    nav_speed -= 1;
+                    if (nav_speed < NAV_SPEED_MIN) {
+                        nav_speed = NAV_SPEED_MIN;
+                    }
+                    pointing_device_set_cpi(nav_speed);
+                    return false;
+            }
+        }
+        return false;
+    case CPI_UP:
+        if (record->event.pressed) {
+            switch (trackball_mode) {
+                case NORMAL:
+                    normal_cpi += 100;
+                    if (normal_cpi > NORMAL_CPI_MAX) {
+                        normal_cpi = NORMAL_CPI_MAX;
+                    }
+                    pointing_device_set_cpi(normal_cpi);
+                    return false;
+                case SLOW:
+                    slow_cpi += 100;
+                    if (slow_cpi > SLOW_CPI_MAX) {
+                        slow_cpi = SLOW_CPI_MAX;
+                    }
+                    pointing_device_set_cpi(slow_cpi);
+                    return false;
+                case SCROLL:
+                    scroll_cpi += 100;
+                    if (scroll_cpi > SCROLL_CPI_MAX) {
+                        scroll_cpi = SCROLL_CPI_MAX;
+                    }
+                    pointing_device_set_cpi(scroll_cpi);
+                    return false;
+                case NAV:
+                    nav_speed += 1;
+                    if (nav_speed > NAV_SPEED_MAX) {
+                        nav_speed = NAV_SPEED_MAX;
+                    }
+                    pointing_device_set_cpi(nav_speed);
+                    return false;
+            }
         }
         return false;
   }

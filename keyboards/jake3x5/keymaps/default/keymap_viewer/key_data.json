@@ -1,6 +1,6 @@
 {
     "layout": {
-        "column_y_offsets": [-0.4,0,0.2,0,0]
+        "column_y_offsets": [-0.4, 0, 0.2, 0, 0]
     },
     "keys": {
         "left": {
@@ -16,11 +16,12 @@
                                 "grk": ";",
                                 "grkAcc": "`",
                                 "mou": "",
-                                "nav": "[UNDO]",
-                                "fun": "[UNDO]",
+                                "nav": "[27F2]",
+                                "fun": "[27F2]",
                                 "sym": "`",
                                 "num": "`",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "W",
@@ -30,11 +31,12 @@
                                 "grk": "ς",
                                 "grkAcc": "´",
                                 "mou": "",
-                                "nav": "[CUT]",
-                                "fun": "[CUT]",
+                                "nav": "[2702]",
+                                "fun": "[2702]",
                                 "sym": "~",
                                 "num": "~",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "F",
@@ -42,41 +44,44 @@
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "φ",
-                                "grkAcc": "~",
+                                "grkAcc": "ˆ",
                                 "mou": "",
-                                "nav": "[COPY]",
-                                "fun": "[COPY]",
+                                "nav": "[1F5CD]",
+                                "fun": "[1F5CD]",
                                 "sym": "&",
                                 "num": "&",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "P",
-                                "doubleTap": "[8612]Tab",
+                                "doubleTap": "[21A4]Tab",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "π",
                                 "grkAcc": "¨",
                                 "mou": "",
-                                "nav": "[PASTE]",
-                                "fun": "[PASTE]",
+                                "nav": "[1F5CE]",
+                                "fun": "[1F5CE]",
                                 "sym": "|",
                                 "num": "|",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "B",
-                                "doubleTap": "Tab[8614]",
+                                "doubleTap": "Tab[21A6]",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "β",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[REDO]",
-                                "fun": "[REDO]",
-                                "sym": "+=",
-                                "num": "+=",
-                                "locksLayer": false
+                                "nav": "[27F3]",
+                                "fun": "[27F3]",
+                                "sym": "+ =",
+                                "num": "+ =",
+                                "locksLayer": false,
+                                "isHome": false
                             }
                         ]
                     },
@@ -84,59 +89,63 @@
                         "keys": [
                             {
                                 "main": "A",
-                                "doubleTap": "[8678]",
+                                "doubleTap": "[21E6]",
                                 "tripleTap": "",
-                                "hold": "{GUI}",
+                                "hold": "[229E]",
                                 "grk": "α",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[8592]",
+                                "nav": "[2190]",
                                 "fun": "",
                                 "sym": "{",
                                 "num": "{",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "R",
-                                "doubleTap": "[8681]",
+                                "doubleTap": "[21E9]",
                                 "tripleTap": "",
-                                "hold": "{ALT}",
+                                "hold": "[2325]",
                                 "grk": "ρ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[8595]",
+                                "nav": "[2193]",
                                 "fun": "",
                                 "sym": "}",
                                 "num": "}",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "S",
-                                "doubleTap": "[8679]",
+                                "doubleTap": "[21E7]",
                                 "tripleTap": "",
-                                "hold": "{SHFT}",
+                                "hold": "[21EA]",
                                 "grk": "σ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[8593]",
+                                "nav": "[2191]",
                                 "fun": "",
                                 "sym": "(",
                                 "num": "(",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "T",
-                                "doubleTap": "[8680]",
+                                "doubleTap": "[21E8]",
                                 "tripleTap": "",
-                                "hold": "{CTRL}",
+                                "hold": "[2303]",
                                 "grk": "τ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[8594]",
+                                "nav": "[2192]",
                                 "fun": "",
                                 "sym": ")",
                                 "num": ")",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "G",
@@ -146,11 +155,12 @@
                                 "grk": "γ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[PRSC]",
+                                "nav": "[2399]",
                                 "fun": "",
                                 "sym": "?",
                                 "num": "?",
-                                "locksLayer": true
+                                "locksLayer": true,
+                                "isHome": false
                             }
                         ]
                     },
@@ -158,73 +168,78 @@
                         "keys": [
                             {
                                 "main": "Z",
-                                "doubleTap": "Undo",
-                                "tripleTap": "Redo",
+                                "doubleTap": "[27F2]",
+                                "tripleTap": "[27F3]",
                                 "hold": "",
                                 "grk": "ζ",
                                 "grkAcc": "᾿",
                                 "mou": "",
-                                "nav": "[8606]",
-                                "fun": "[UNDO]",
+                                "nav": "[219E]",
+                                "fun": "[27F2]",
                                 "sym": "!",
                                 "num": "!",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "X",
-                                "doubleTap": "Cut",
+                                "doubleTap": "[2702]",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "χ",
-                                "grkAcc": "῾a",
+                                "grkAcc": "῾",
                                 "mou": "",
-                                "nav": "[8609]",
-                                "fun": "[CUT]",
+                                "nav": "[21A1]",
+                                "fun": "[2702]",
                                 "sym": "=",
                                 "num": "=",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "C",
-                                "doubleTap": "Copy",
+                                "doubleTap": "[1F5CD]",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "ψ",
-                                "grkAcc": "¨",
+                                "grkAcc": "ˉ",
                                 "mou": "",
-                                "nav": "[8607]",
-                                "fun": "[COPY]",
+                                "nav": "[219F]",
+                                "fun": "[1F5CD]",
                                 "sym": "<",
                                 "num": "<",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "D",
-                                "doubleTap": "[Word]",
+                                "doubleTap": "(Word)",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "δ",
                                 "grkAcc": "˘",
                                 "mou": "",
-                                "nav": "[8608]",
-                                "fun": "[PASTE]",
+                                "nav": "[21A0]",
+                                "fun": "[1F5CE]",
                                 "sym": ">",
                                 "num": ">",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "V",
-                                "doubleTap": "Paste",
+                                "doubleTap": "[1F5CE]",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "ω",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[INS]",
-                                "fun": "[REDO]",
-                                "sym": "-=",
-                                "num": "-=",
-                                "locksLayer": false
+                                "nav": "[27F4]",
+                                "fun": "[27F3]",
+                                "sym": "- =",
+                                "num": "- =",
+                                "locksLayer": false,
+                                "isHome": false
                             }
                         ]
                     }
@@ -233,38 +248,40 @@
             "thumbs": {
                 "keys": [
                     {
-                        "main": "[SHFT]",
+                        "main": "[21EA]",
                         "doubleTap": "\"",
                         "tripleTap": "",
                         "hold": "NAV",
                         "grk": "",
                         "grkAcc": "",
-                        "mou": "[RCLK]",
+                        "mou": "[2025]",
                         "nav": "",
                         "fun": "",
                         "sym": ";",
                         "num": "",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": false
                     },
                     {
-                        "main": "[ENTER]",
+                        "main": "[23CE]",
                         "doubleTap": "'",
                         "tripleTap": "",
                         "hold": "NUM",
                         "grk": "",
                         "grkAcc": "",
-                        "mou": "[LCLK]",
+                        "mou": "[2024]",
                         "nav": "",
                         "fun": "",
                         "sym": ":",
                         "num": "",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": true
                     },
                     {
-                        "main": "[DEL]",
-                        "doubleTap": "[ESC]",
+                        "main": "[2326]",
+                        "doubleTap": "[238B]",
                         "tripleTap": "",
-                        "hold": "[SLOW]",
+                        "hold": "SLOW",
                         "grk": "",
                         "grkAcc": "",
                         "mou": "",
@@ -272,27 +289,29 @@
                         "fun": "",
                         "sym": "/",
                         "num": "",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": false
                     },
                     {
-                        "main": "[TAB]",
-                        "doubleTap": "[SHFT_TAB]",
+                        "main": "[21E5]",
+                        "doubleTap": "[21E4]",
                         "tripleTap": "",
-                        "hold": "[SCROLL]",
+                        "hold": "SCROLL",
                         "grk": "",
                         "grkAcc": "",
-                        "mou": "[MCLK]",
+                        "mou": "[2026]",
                         "nav": "",
                         "fun": "",
                         "sym": "#",
                         "num": "",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": false
                     },
                     {
-                        "main": "[LEAD]",
-                        "doubleTap": "[LANG]",
+                        "main": "[25C7]",
+                        "doubleTap": "[1F3F3]",
                         "tripleTap": "",
-                        "hold": "[FUN]",
+                        "hold": "FUN",
                         "grk": "",
                         "grkAcc": "",
                         "mou": "",
@@ -300,7 +319,8 @@
                         "fun": "",
                         "sym": "\\",
                         "num": "",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": false
                     }
                 ]
             },
@@ -308,32 +328,32 @@
                 "main": {
                     "tap": "Open Tab",
                     "doubleTap": "Close Tab",
-                    "clockwise": "[8612]Tab",
-                    "counterClockwise": "Tab[8614]"
+                    "counterClockwise": "[21A4]Tab",
+                    "clockwise": "Tab[21A6]"
                 },
                 "nav": {
                     "tap": "New Desktop",
                     "doubleTap": "Close Desktop",
-                    "clockwise": "[8612]Desktop",
-                    "counterClockwise": "Desktop[8614]"
+                    "counterClockwise": "[21A4]Desktop",
+                    "clockwise": "Desktop[21A6]"
                 },
                 "fun": {
                     "tap": "",
                     "doubleTap": "",
-                    "clockwise": "",
-                    "counterClockwise": ""
+                    "counterClockwise": "",
+                    "clockwise": ""
                 },
                 "sym": {
                     "tap": "Play Macro",
                     "doubleTap": "Record Macro",
-                    "clockwise": "F19",
-                    "counterClockwise": "F20"
+                    "counterClockwise": "Zoom +",
+                    "clockwise": "Zoom -"
                 },
                 "num": {
                     "tap": "",
                     "doubleTap": "",
-                    "clockwise": "",
-                    "counterClockwise": ""
+                    "counterClockwise": "",
+                    "clockwise": ""
                 }
             }
         },
@@ -344,31 +364,33 @@
                         "keys": [
                             {
                                 "main": "J",
-                                "doubleTap": "[8612]App",
+                                "doubleTap": "[21A4]App",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "ξ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[REDO]",
+                                "nav": "[27F3]",
                                 "fun": "F12",
                                 "sym": "$",
                                 "num": "$",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "L",
-                                "doubleTap": "App[8214]",
+                                "doubleTap": "App[21A6]",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "λ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[PASTE]",
+                                "nav": "[1F5CE]",
                                 "fun": "F7",
                                 "sym": "@",
                                 "num": "7",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "U",
@@ -378,11 +400,12 @@
                                 "grk": "υ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[COPY]",
+                                "nav": "[1F5CD]",
                                 "fun": "F8",
                                 "sym": "^",
                                 "num": "8",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "Y",
@@ -392,11 +415,12 @@
                                 "grk": "ϡ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[CUT]",
+                                "nav": "[2702]",
                                 "fun": "F9",
                                 "sym": "\"",
                                 "num": "9",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "Wh",
@@ -406,11 +430,12 @@
                                 "grk": "ꞏ",
                                 "grkAcc": "",
                                 "mou": "",
-                                "nav": "[UNDO]",
+                                "nav": "[27F2]",
                                 "fun": "F15",
                                 "sym": "+",
                                 "num": "+",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             }
                         ]
                     },
@@ -428,41 +453,44 @@
                                 "fun": "F11",
                                 "sym": "*",
                                 "num": "*",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "N",
-                                "doubleTap": "[8592]",
+                                "doubleTap": "[2190]",
                                 "tripleTap": "",
-                                "hold": "[CTRL]",
+                                "hold": "[2303]",
                                 "grk": "ν",
                                 "grkAcc": "",
                                 "mou": "",
                                 "nav": "",
                                 "fun": "F4",
-                                "sym": "[",
+                                "sym": "]",
                                 "num": "4",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "E",
-                                "doubleTap": "[8593]",
+                                "doubleTap": "[2193]",
                                 "tripleTap": "",
-                                "hold": "[SHFT]",
+                                "hold": "[21EA]",
                                 "grk": "ε",
                                 "grkAcc": "",
                                 "mou": "",
                                 "nav": "",
                                 "fun": "F5",
-                                "sym": "]",
+                                "sym": "[",
                                 "num": "5",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "I",
-                                "doubleTap": "[8595]",
+                                "doubleTap": "[2191]",
                                 "tripleTap": "",
-                                "hold": "[ALT]",
+                                "hold": "[2325]",
                                 "grk": "ι",
                                 "grkAcc": "",
                                 "mou": "",
@@ -470,13 +498,14 @@
                                 "fun": "F6",
                                 "sym": "_",
                                 "num": "6",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             },
                             {
                                 "main": "O",
-                                "doubleTap": "[8594]",
+                                "doubleTap": "[2192]",
                                 "tripleTap": "",
-                                "hold": "[GUI]",
+                                "hold": "[229E]",
                                 "grk": "ο",
                                 "grkAcc": "",
                                 "mou": "",
@@ -484,7 +513,8 @@
                                 "fun": "F14",
                                 "sym": "-",
                                 "num": "-",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": true
                             }
                         ]
                     },
@@ -502,11 +532,12 @@
                                 "fun": "F10",
                                 "sym": "%",
                                 "num": "%",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "H",
-                                "doubleTap": "[Line]",
+                                "doubleTap": "(Line)",
                                 "tripleTap": "",
                                 "hold": "",
                                 "grk": "η",
@@ -516,7 +547,8 @@
                                 "fun": "F1",
                                 "sym": ".",
                                 "num": "1",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "Th",
@@ -530,7 +562,8 @@
                                 "fun": "F2",
                                 "sym": ",",
                                 "num": "2",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "Ch",
@@ -544,7 +577,8 @@
                                 "fun": "F3",
                                 "sym": "'",
                                 "num": "3",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             },
                             {
                                 "main": "Sh",
@@ -556,9 +590,10 @@
                                 "mou": "",
                                 "nav": "",
                                 "fun": "F13",
-                                "sym": "",
+                                "sym": "/",
                                 "num": "/",
-                                "locksLayer": false
+                                "locksLayer": false,
+                                "isHome": false
                             }
                         ]
                     }
@@ -567,10 +602,10 @@
             "thumbs": {
                 "keys": [
                     {
-                        "main": "[BSPC]",
+                        "main": "[232B]",
                         "doubleTap": ",",
-                        "tripleTap": ",[SPC]",
-                        "hold": "[HYPER]",
+                        "tripleTap": ",[2423]",
+                        "hold": "[21C8]",
                         "grk": "",
                         "grkAcc": "",
                         "mou": "",
@@ -578,12 +613,13 @@
                         "fun": "F16",
                         "sym": "",
                         "num": ",",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": false
                     },
                     {
-                        "main": "[SPC]",
+                        "main": "[2423]",
                         "doubleTap": ".",
-                        "tripleTap": ".[SPC]",
+                        "tripleTap": ".[2423]",
                         "hold": "SYM",
                         "grk": "",
                         "grkAcc": "",
@@ -592,10 +628,11 @@
                         "fun": "F17",
                         "sym": "",
                         "num": "0",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": true
                     },
                     {
-                        "main": "[RPT]",
+                        "main": "[21AC]",
                         "doubleTap": "",
                         "tripleTap": "",
                         "hold": "NAV",
@@ -606,41 +643,42 @@
                         "fun": "F18",
                         "sym": "",
                         "num": ".",
-                        "locksLayer": false
+                        "locksLayer": false,
+                        "isHome": false
                     }
                 ]
-            }
-        },
-        "encoder": {
-            "main": {
-                "tap": "Open Tab",
-                "doubleTap": "Close Tab",
-                "clockwise": "[8612]Tab",
-                "counterClockwise": "Tab[8614]"
             },
-            "nav": {
-                "tap": "",
-                "doubleTap": "",
-                "clockwise": "",
-                "counterClockwise": ""
-            },
-            "fun": {
-                "tap": "Mute",
-                "doubleTap": "",
-                "clockwise": "Volume [8595]",
-                "counterClockwise": "Volume [8593]"
-            },
-            "sym": {
-                "tap": "",
-                "doubleTap": "",
-                "clockwise": "",
-                "counterClockwise": ""
-            },
-            "num": {
-                "tap": "Play Macro",
-                "doubleTap": "Record Macro",
-                "clockwise": "Zoom In",
-                "counterClockwise": "Zoom Out"
+            "encoder": {
+                "main": {
+                    "tap": "Open Tab",
+                    "doubleTap": "Close Tab",
+                    "counterClockwise": "[21A4]Tab",
+                    "clockwise": "Tab[21A6]"
+                },
+                "nav": {
+                    "tap": "",
+                    "doubleTap": "",
+                    "counterClockwise": "",
+                    "clockwise": ""
+                },
+                "fun": {
+                    "tap": "Mute",
+                    "doubleTap": "",
+                    "counterClockwise": "Volume [2193]",
+                    "clockwise": "Volume [2191]"
+                },
+                "sym": {
+                    "tap": "",
+                    "doubleTap": "",
+                    "counterClockwise": "",
+                    "clockwise": ""
+                },
+                "num": {
+                    "tap": "Play Macro",
+                    "doubleTap": "Record Macro",
+                    "counterClockwise": "CPI [2193]",
+                    "clockwise": "CPI [2191]"
+                }
             }
         }
     }
