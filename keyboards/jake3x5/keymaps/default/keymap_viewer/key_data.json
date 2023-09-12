@@ -278,8 +278,8 @@
                         "isHome": true
                     },
                     {
-                        "main": "[2326]",
-                        "doubleTap": "[238B]",
+                        "main": "[21AC]",
+                        "doubleTap": "",
                         "tripleTap": "",
                         "hold": "SLOW",
                         "grk": "",
@@ -632,8 +632,8 @@
                         "isHome": true
                     },
                     {
-                        "main": "[21AC]",
-                        "doubleTap": "",
+                        "main": "[2326]",
+                        "doubleTap": "[238B]",
                         "tripleTap": "",
                         "hold": "NAV",
                         "grk": "",

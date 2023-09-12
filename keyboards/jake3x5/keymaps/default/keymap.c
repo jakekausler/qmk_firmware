@@ -830,7 +830,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TD(TD_Z),   TD(TD_X),   TD(TD_C),   TD(TD_D),   TD(TD_V),    TD(TD_SWAPP),TD(TD_SWTAB),TD(TD_K),   TD(TD_H),   TD(TD_TH),  TD(TD_CH),  TD(TD_SH),
 // └───────────┴───────────┴───────────┴───────────┴───────────┘└───────────┘└───────────┘└───────────┴───────────┴───────────┴───────────┴───────────┘
 //                         ┌───────────┬───────────┬───────────┐                          ┌───────────┬───────────┬───────────┐
-                            TD(TD_1SS), TD(TD_ENT), TD(TD_DEL),                            TD(TD_BSPC),TD(TD_SPC), TD(TD_RPT),
+                            TD(TD_1SS), TD(TD_ENT), TD(TD_RPT),                            TD(TD_BSPC),TD(TD_SPC), TD(TD_DEL),
 //                         └───────────┼───────────┼───────────┤                          └───────────┴───────────┴───────────┘
                                         TD(TD_TAB), TD(TD_LDR)
 //                                     └───────────┴───────────┘
